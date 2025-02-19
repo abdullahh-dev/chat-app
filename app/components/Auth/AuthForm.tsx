@@ -65,7 +65,7 @@ const AuthForm = () => {
             register={register}
             errors={errors}
           />
-          <FormButton type="submit" fullWidth>
+          <FormButton disabled={loading} type="submit" fullWidth>
             {formType === "Login" ? "Sign in" : "Register"}
           </FormButton>
         </form>

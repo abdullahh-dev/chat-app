@@ -21,7 +21,7 @@ const FormButton: FC<ButtonProps> = ({
           text-white
             `,
           fullWidth && "w-full",
-          disabled && "bg-gray-300 cursor-default",
+          disabled && "!bg-gray-400 cursor-default",
           variant === "primary" && "bg-emerald-700 hover:bg-emerald-800",
           variant === "secondary" && "bg-gray-300",
           variant === "danger" && "bg-rose-500"

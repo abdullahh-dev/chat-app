@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { InputProps } from "../Types";
+import { InputProps } from "../../Types";
 import clsx from "clsx";
 
 const FormInput: FC<InputProps> = ({

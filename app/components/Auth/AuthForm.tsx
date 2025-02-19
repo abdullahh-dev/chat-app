@@ -1,8 +1,9 @@
 "use client";
 import React, { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import FormInput from "../Inputs/Form-Input";
+import FormInput from "../ui/Inputs/Form-Input";
 import { FORM_TYPE } from "../Types";
+import FormButton from "../ui/Button/FormButton";
 
 const AuthForm = () => {
   const [formType, setFormType] = useState<FORM_TYPE>("Login");
@@ -64,7 +65,9 @@ const AuthForm = () => {
             register={register}
             errors={errors}
           />
-          <button></button>
+          <FormButton type="submit" fullWidth>
+            {formType === "Login" ? "Sign in" : "Register"}
+          </FormButton>
         </form>
       </div>
     </section>

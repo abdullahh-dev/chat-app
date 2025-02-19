@@ -12,3 +12,12 @@ export interface InputProps {
   disabled?: boolean;
   placeholder: string;
 }
+
+export interface ButtonProps {
+  type?: "button" | "submit" | "reset" | undefined;
+  fullWidth?: boolean;
+  children?: React.ReactNode;
+  variant?: "primary" | "secondary" | "danger";
+  onClick?: () => void;
+  disabled?: boolean;
+}

@@ -11,9 +11,14 @@ export default {
       colors: {
         primary: "var(--color-primary)",
         secondary: "var(--color-secondary)",
-        // ...
+        "fog-white": "var(--color-body)",
+        border: "var(--color-border)",
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/forms")({
+      strategy: "class",
+    }),
+  ],
 } satisfies Config;

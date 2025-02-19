@@ -2,8 +2,10 @@ html,
 body,
 :root {
   height: 100%;
-  --color-primary: #1a1a1a;
-  --color-secondary: #ecc94b;
+  --color-primary: #11100f;
+  --color-secondary: #272727;
+  --color-body: #ffffff0e;
+  --color-border: #2d2d2d;
 }
 
 @tailwind base;

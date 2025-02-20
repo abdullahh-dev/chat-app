@@ -21,22 +21,7 @@ const AuthForm = () => {
     },
   });
 
-  const toggleFormType = useCallback(() => {
-    setFormType(formType === "Login" ? "Register" : "Register");
-  }, [formType]);
-
-  const submit: SubmitHandler<FieldValues> = (data) => {
-    setLoading(true);
-    if (formType === "Login") {
-    }
-
-    if (formType === "Register") {
-    }
-  };
-
-  const socialAction = (action: string) => {
-    setLoading(true);
-  };
+  const submit: SubmitHandler<FieldValues> = (data) => {};
 
   return (
     <section className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">

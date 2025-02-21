@@ -20,8 +20,13 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <ThemeProvider>
+      <html lang="en" suppressHydrationWarning>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          storageKey="chat-app-theme"
+        >
           <body className={`${openSans.className} antialiased`}>
             {children}
           </body>

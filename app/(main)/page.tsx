@@ -1,10 +1,12 @@
 import { UserButton } from "@clerk/nextjs";
+import { ModeToggle } from "../components/mode-toggler";
 
 export default function Home() {
   return (
-    <section className="flex flex-col justify-center bg-primary py-12 sm:px-6 lg:px-8 min-h-full">
+    <section className="flex flex-col justify-center py-12 sm:px-6 lg:px-8 min-h-full">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <UserButton />
+        <UserButton signInUrl="/" />
+        <ModeToggle />
         <h2
           className="mt-6 text-center text-3xl
     tracking-tight

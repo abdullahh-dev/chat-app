@@ -22,6 +22,8 @@ model Profile {
   email String @db.Text
 
   server Server[]
+  members Member[]
+  channels Channel[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -37,10 +39,50 @@ model Server {
   profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
-  uodatedAt DateTime @updatedAt
+  updatedAt DateTime @updatedAt
+
+  members Member[]
+  channels Channel[]
+
+  @@index([profileId])
+
+}
+
+enum MemberRole {
+  ADMIN
+  MODERATOR
+  GUEST
+}
+model Member {
+  id String @id @default(uuid())
+  role MemberRole @default(GUEST)
+
+  profileId String
+  profile Profile @relation(fields: [profileId],references: [id])
+
+
+  serverId String
+  server Server @relation(fields: [serverId], references: [id])
 
   @@index([profileId])
 
 }
 
 
+enum ChannelType {
+  Audio
+  Text
+  Video
+}
+
+model Channel {
+  id String @id @default(uuid())
+  name String
+  type ChannelType @default(Text)
+
+  profileId String
+  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  serverId String
+  server Server @relation(fields: [serverId], references: [id], onDelete: Cascade)
+}

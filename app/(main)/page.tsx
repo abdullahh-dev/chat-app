@@ -1,20 +1,25 @@
-import { UserButton } from "@clerk/nextjs";
-import { ModeToggle } from "../components/mode-toggler";
+import { InitialModal } from "@/components/modals/initial-model";
+import { db } from "@/lib/db";
+import { getCurrentUserProfile } from "@/lib/initial-profile";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+export default async function Home() {
+  const profile = await getCurrentUserProfile();
+  const server = await db.server.findFirst({
+    where: {
+      members: {
+        some: {
+          profileId: profile.id,
+        },
+      },
+    },
+  });
+
+  if (server) redirect(`/servers/${server.id}`);
+
   return (
-    <section className="flex flex-col justify-center py-12 sm:px-6 lg:px-8 min-h-full">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <UserButton signInUrl="/" />
-        <ModeToggle />
-        <h2
-          className="mt-6 text-center text-3xl
-    tracking-tight
-    text-gray-200"
-        >
-          Sign in to your account
-        </h2>
-      </div>
+    <section className="h-screen flex items-center justify-center w-[100%]">
+      <InitialModal />
     </section>
   );
 }

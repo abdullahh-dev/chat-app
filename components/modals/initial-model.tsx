@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import {
   DialogContent,
   DialogDescription,
@@ -19,7 +20,11 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import FileUpload from "@/app/components/File-upload";
+
+import { useRouter } from "next/navigation";
 export const InitialModal = () => {
+  const router = useRouter();
   const formSchema = z.object({
     name: z.string().min(1, {
       message: "Server name is required.",
@@ -41,12 +46,18 @@ export const InitialModal = () => {
     handleSubmit,
     control,
     formState: { isLoading, errors },
+    reset,
   } = form;
 
-  console.log(errors);
-
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    try {
+      await axios.post("/api/servers", values);
+      reset();
+      router.refresh();
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -65,7 +76,23 @@ export const InitialModal = () => {
         <Form {...form}>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
             <div className="px-6 space-y-8">
-              <div></div>
+              <div className="flex items-center justify-center text-center">
+                <FormField
+                  name="imageUrl"
+                  control={control}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <FileUpload
+                          endpoint="serverImage"
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              </div>
               <FormField
                 control={control}
                 name="name"
@@ -88,7 +115,7 @@ export const InitialModal = () => {
               />
             </div>
             <DialogFooter className="px-6 py-4">
-              <Button variant="primary" disabled={isLoading}>
+              <Button className="w-full" variant="primary" disabled={isLoading}>
                 Create
               </Button>
             </DialogFooter>

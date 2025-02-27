@@ -45,7 +45,7 @@ export const InitialModal = () => {
   const {
     handleSubmit,
     control,
-    formState: { isLoading, errors },
+    formState: { isLoading },
     reset,
   } = form;
 

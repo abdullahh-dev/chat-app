@@ -5,6 +5,10 @@ import { redirect } from "next/navigation";
 
 export default async function Home() {
   const profile = await getCurrentUserProfile();
+
+  if (!profile) {
+    redirect("/sign-in");
+  }
   const server = await db.server.findFirst({
     where: {
       members: {

@@ -3,6 +3,10 @@ import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 import NavigationAction from "./NavigationAction";
 import { Separator } from "@/components/ui/separator";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import NavigationItem from "./NavigationItem";
+import { ModeToggle } from "../mode-toggler";
+import { UserButton } from "@clerk/nextjs";
 
 const NavigationSidebar = async () => {
   const profile = await currentUser();
@@ -27,6 +31,27 @@ const NavigationSidebar = async () => {
     >
       <NavigationAction />
       <Separator className="h-[2px] bg-zinc-300 dark:bg-zinc-700 rounded-md w-10 mx-auto" />
+      <ScrollArea className="flex-1 w-full">
+        {servers.map((server) => (
+          <div key={server.id}>
+            <NavigationItem
+              id={server.id}
+              imageUrl={server.imageUrl}
+              name={server.name}
+            />
+          </div>
+        ))}
+      </ScrollArea>
+      <div className="pb-3 mt-auto flex items-cente flex-col space-y-4">
+        <ModeToggle />
+        <UserButton
+          appearance={{
+            elements: {
+              avatarBox: "size-[48px]",
+            },
+          }}
+        />
+      </div>
     </div>
   );
 };

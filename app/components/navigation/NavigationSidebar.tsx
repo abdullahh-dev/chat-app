@@ -2,6 +2,7 @@ import { currentUser } from "@/lib/current-user";
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 import NavigationAction from "./NavigationAction";
+import { Separator } from "@/components/ui/separator";
 
 const NavigationSidebar = async () => {
   const profile = await currentUser();
@@ -25,6 +26,7 @@ const NavigationSidebar = async () => {
     py-3"
     >
       <NavigationAction />
+      <Separator className="h-[2px] bg-zinc-300 dark:bg-zinc-700 rounded-md w-10 mx-auto" />
     </div>
   );
 };
